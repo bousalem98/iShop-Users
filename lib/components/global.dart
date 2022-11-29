@@ -22,4 +22,4 @@ final itemsImagesList = [
 CartMethods cartMethods = CartMethods();
 double countStarsRating = 0.0;
 String titleStarsRating = "";
-String fcmServerToken ="";
+String fcmServerToken = "";
