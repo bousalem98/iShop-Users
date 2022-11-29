@@ -18,7 +18,7 @@ class RateSellerScreen extends StatefulWidget {
 }
 
 class _RateSellerScreenState extends State<RateSellerScreen> {
-  List<String> voteList = [];
+  Map voteList = {};
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +143,10 @@ class _RateSellerScreenState extends State<RateSellerScreen> {
                       .then((snap) {
                     //seller not yet received rating from any user
                     if (snap.data()!["ratings"] == null) {
-                      voteList.add("0:$countStarsRating");
-                      voteList.add("1:1");
+                      voteList = {
+                        "0": "$countStarsRating",
+                        "1": "1",
+                      };
                       FirebaseFirestore.instance
                           .collection("sellers")
                           .doc(widget.sellerId)
@@ -154,14 +156,17 @@ class _RateSellerScreenState extends State<RateSellerScreen> {
                     }
                     //seller has already received rating from any user
                     else {
-                      List<String> pastList = snap.data()!["ratings"];
-                      double pastRatings = double.parse(pastList.elementAt(0));
-                      double pastnbRaters = double.parse(pastList.elementAt(1));
+                      Map pastList = snap.data()!["ratings"];
+                      double pastRatings = double.parse(pastList['0']);
+                      double pastnbRaters = double.parse(pastList['1']);
                       double newnbRaters = pastnbRaters + 1;
 
                       double newRatings = pastRatings + countStarsRating;
-                      voteList.add("0:$newRatings");
-                      voteList.add("1:$newnbRaters");
+                      voteList = {
+                        "0": "$newRatings",
+                        "1": "$newnbRaters",
+                      };
+
                       FirebaseFirestore.instance
                           .collection("sellers")
                           .doc(widget.sellerId)
