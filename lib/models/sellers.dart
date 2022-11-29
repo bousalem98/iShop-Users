@@ -3,7 +3,7 @@ class Sellers {
   String? uid;
   String? photoUrl;
   String? email;
-  String? ratings;
+  List<String>? ratings;
 
   Sellers({
     this.name,

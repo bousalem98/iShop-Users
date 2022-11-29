@@ -65,7 +65,7 @@ class _SellersUIDesignWidgetState extends State<SellersUIDesignWidget> {
                 SmoothStarRating(
                   rating: widget.model!.ratings == null
                       ? 0.0
-                      : double.parse(widget.model!.ratings.toString()),
+                      : getRatings(widget.model!.ratings?.toList()),
                   starCount: 5,
                   color: Colors.purpleAccent,
                   borderColor: Colors.purpleAccent,
@@ -77,5 +77,11 @@ class _SellersUIDesignWidgetState extends State<SellersUIDesignWidget> {
         ),
       ),
     );
+  }
+
+  getRatings(List<String>? ratings) {
+    double totalratings = double.parse(ratings!.elementAt(0));
+    double nbRaters = double.parse(ratings!.elementAt(1));
+    return totalratings / nbRaters;
   }
 }

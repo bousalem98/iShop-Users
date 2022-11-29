@@ -9,7 +9,7 @@ class CartMethods {
   addItemToCart(String? itemId, int itemCounter, BuildContext context) {
     List<String>? tempList = sharedPreferences!.getStringList("userCart");
     tempList!.add("$itemId:$itemCounter"); //2367121:5
-
+    
     //save to firestore database
     FirebaseFirestore.instance
         .collection("users")
